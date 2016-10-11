@@ -1,0 +1,35 @@
+// --------------------------------------------------------------------------
+// Licensed Materials - Property of IBM
+//
+// 5725-A06 5725-A29 5724-Y48 5724-Y49 5724-Y54 5724-Y55
+// Copyright IBM Corporation 1998, 2013. All Rights Reserved.
+//
+// Note to U.S. Government Users Restricted Rights:
+// Use, duplication or disclosure restricted by GSA ADP Schedule
+// Contract with IBM Corp.
+// --------------------------------------------------------------------------
+Params =
+<
+  12, // max nb slabs
+   2   // max colors per slab
+>;
+
+Orders =
+{
+    <1, 22, 5>
+  , <2,  9, 3>
+  , <3,  9, 4>
+  , <4,  8, 5>
+  , <5,  8, 7>
+  , <6,  6, 3>
+  , <7,  5, 6>
+  , <8,  3, 0>
+  , <9,  3, 2>
+  , <10, 3, 3>
+  , <11, 2, 1>
+  , <12, 2, 5>
+};
+
+// A slab of size 0 represents no slab
+slabWeights = { 0, 11, 13, 16, 17, 19, 20, 23, 24, 25,
+               26, 27, 28, 29, 30, 33, 34, 40, 43, 45 };

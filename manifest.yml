@@ -1,0 +1,10 @@
+declared-services:
+  DOcplexcloud-service:
+    label: docplexcloud
+    plan: ODSTRIAL
+applications:
+- name: DOcplexcloud-app
+  host: DOcplexcloud-app
+  memory: 256M
+  services:
+  - DOcplexcloud-service

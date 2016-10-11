@@ -1,0 +1,5 @@
+node_modules
+/*.log
+vcap-local.json
+resources/solution.json
+resources/solution.log

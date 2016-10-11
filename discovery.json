@@ -1,0 +1,13 @@
+{
+  "discover": true,
+  "type": "hello_world",
+  "compute": [
+    "cloud_foundry"
+  ],
+  "runtimes": [
+    "node"
+  ],
+  "services": [
+    "docplexcloud"
+  ]
+}

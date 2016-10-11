@@ -1,0 +1,12 @@
+{
+  "docplexcloud" : [ {
+    "name" : "DOcplexcloud-service",
+    "label" : "docplexcloud",
+    "plan" : "ODSTRIAL",
+    "credentials" : {
+      "url" : "YOUR_BASE_URL",
+      "client_id" : "XXX",
+      "subscriptionId" : "YYY"
+    }
+  } ]
+}

@@ -1,0 +1,58 @@
+<!-- HTML generated using hilite.me --><div><pre style="margin: 0;"><span style="color: #008800; font-weight: bold">var</span> app <span style="color: #333333">=</span> express();
+<span style="color: #008800; font-weight: bold">var</span> cfenv <span style="color: #333333">=</span> require(<span style="background-color: #fff0f0">&#39;cfenv&#39;</span>);
+<span style="color: #008800; font-weight: bold">var</span> docloud <span style="color: #333333">=</span> require(<span style="background-color: #fff0f0">&quot;docplexcloud-nodejs-api&quot;</span>);
+<span style="color: #008800; font-weight: bold">var</span> fs <span style="color: #333333">=</span> require(<span style="background-color: #fff0f0">&#39;fs&#39;</span>);
+<span style="color: #008800; font-weight: bold">var</span> appEnv <span style="color: #333333">=</span> cfenv.getAppEnv();
+<span style="color: #008800; font-weight: bold">var</span> credentials <span style="color: #333333">=</span> appEnv.getServiceCreds(<span style="background-color: #fff0f0">&quot;[Your service]&quot;</span>);
+
+<span style="color: #008800; font-weight: bold">var</span> client <span style="color: #333333">=</span> docloud({
+  url<span style="color: #333333">:</span> credentials.url,
+  clientId<span style="color: #333333">:</span> credentials.client_id
+});
+
+<span style="color: #008800; font-weight: bold">var</span> solveURI <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&#39;/solveDiet&#39;</span>;
+
+app.post(solveURI, <span style="color: #008800; font-weight: bold">function</span> (req, res) {
+  res.setHeader(<span style="background-color: #fff0f0">&#39;Content-Type&#39;</span>, <span style="background-color: #fff0f0">&#39;application/json&#39;</span>);
+  <span style="color: #008800; font-weight: bold">var</span> attachments <span style="color: #333333">=</span> [];
+  <span style="color: #888888">// For this entry point, we solve the diet file.</span>
+  <span style="color: #888888">// Replace [&#39;diet.lp&#39;] with [&#39;steelmill.mod&#39;, &#39;steelmill.dat&#39;] for solving the steelmill problem</span>
+  <span style="color: #008800; font-weight: bold">var</span> files <span style="color: #333333">=</span> [<span style="background-color: #fff0f0">&#39;diet.lp&#39;</span>];
+  files.map(<span style="color: #008800; font-weight: bold">function</span> (file) {
+    attachments.push({
+      name<span style="color: #333333">:</span> file,
+      stream<span style="color: #333333">:</span> fs.createReadStream(<span style="background-color: #fff0f0">&#39;resources/&#39;</span> <span style="color: #333333">+</span> file)
+    });
+  });
+  client.execute({
+      logstream<span style="color: #333333">:</span> process.stdout,
+      parameters<span style="color: #333333">:</span> {<span style="background-color: #fff0f0">&quot;oaas.TIME_LIMIT&quot;</span><span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">3</span> <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">60</span> <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">1000</span>},
+      attachments<span style="color: #333333">:</span> attachments
+    })
+    .on(<span style="background-color: #fff0f0">&#39;created&#39;</span>, <span style="color: #008800; font-weight: bold">function</span> (jobid) {
+      res.writeHead(<span style="background-color: #fff0f0">&quot;200&quot;</span>);
+      res.write(JSON.stringify({ id<span style="color: #333333">:</span> jobid }));
+      res.end();
+    })
+    .on(<span style="background-color: #fff0f0">&#39;processed&#39;</span>, <span style="color: #008800; font-weight: bold">function</span> (jobid) {
+      console.log(jobid <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; processed&quot;</span>);
+      client.downloadAttachment(jobid, <span style="background-color: #fff0f0">&#39;solution.json&#39;</span>, fs.createWriteStream(<span style="background-color: #fff0f0">&#39;resources/solution.json&#39;</span>))
+        .then(<span style="color: #008800; font-weight: bold">function</span> () {
+          <span style="color: #008800; font-weight: bold">return</span> client.downloadLog(jobid, fs.createWriteStream(<span style="background-color: #fff0f0">&#39;resources/solution.log&#39;</span>))
+        });
+    })
+    .on(<span style="background-color: #fff0f0">&#39;interrupted&#39;</span>, <span style="color: #008800; font-weight: bold">function</span> (jobid) {
+      console.log(<span style="background-color: #fff0f0">&quot;job was interrupted :&quot;</span><span style="color: #333333">+</span>jobid);
+    })
+    .on(<span style="background-color: #fff0f0">&#39;failed&#39;</span>, <span style="color: #008800; font-weight: bold">function</span> (jobid) {
+      console.log(<span style="background-color: #fff0f0">&quot;job has failed :&quot;</span><span style="color: #333333">+</span>jobid);
+    })
+    .on(<span style="background-color: #fff0f0">&#39;error&#39;</span>, <span style="color: #008800; font-weight: bold">function</span> (error) {
+      console.log(error);
+      res.status(<span style="color: #0000DD; font-weight: bold">500</span>).send({
+        error<span style="color: #333333">:</span> <span style="color: #008800; font-weight: bold">true</span>,
+        message<span style="color: #333333">:</span> error.message
+      });
+    });
+});
+</pre></div>

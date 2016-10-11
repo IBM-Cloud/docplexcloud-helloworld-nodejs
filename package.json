@@ -1,0 +1,19 @@
+{
+	"name": "DOcplexcloud-app",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"start": "node app.js"
+	},
+	"dependencies": {
+		"express": "4.13.x",
+		"cfenv": "1.0.x",
+		"docplexcloud-nodejs-api":"*",
+		"cf-deployment-tracker-client": "*"
+	},
+	"repository": {},
+	"engines": {
+		"node": "4.x"
+	},
+  "license": "Apache-2.0"
+}

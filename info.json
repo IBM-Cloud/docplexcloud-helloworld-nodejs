@@ -1,0 +1,23 @@
+{
+
+    "provider": [
+        "IBM"
+    ],
+    "name": "DOcplexcloud NodeJS sample",
+    "model": [
+        "Node"
+    ],
+    "development": [
+        "NodeJS"
+    ],
+    "category": [
+        {
+            "APPLICATION": [
+                "Web Application",
+                "Mobile Application"
+            ]
+        }
+    ],
+    "abstract": "Demonstrates Bluemix DOcplexcloud service"
+
+}

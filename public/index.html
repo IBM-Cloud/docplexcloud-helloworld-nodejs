@@ -1,0 +1,261 @@
+<!-- /**
+ * Copyright 2016 IBM Corp. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the “License”);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an “AS IS” BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+  -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>NodeJS (DOcplexcloud) Starter Application</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
+
+    <!--  Bootstrap  -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <script src="js/tree.js"></script>
+    <script src="js/client.js"></script>
+</head>
+
+<body>
+<!--built-in from bluemix toolkit-->
+<div class="h-center" id="demos">
+    <section class="header">
+            <h1>Hi there!</h1>
+            <p>Thanks for creating a
+                <span class="blue">NodeJS (DOcplexcloud) Starter Application</span>.
+            </p>
+            <p>
+                Below is a visualization of commands accessible from DOcplexcloud NodeJS client,<br>
+                this API enables to submit a problem to solve, see job info, download solution file, and delete jobs.
+            </p>
+            <p>
+                Click on the buttons below to play with the DOcplexcloud API service.
+            </p>
+    </section>
+</div>
+
+<!--Handlebars Template for a demo panel-->
+<script type='text/template' id='demoPanel'>
+    <section class="demo-panel panel panel-default">
+        <div class="panel-body">
+            {{#if button_text}}
+            <button type="button" class="btn btn-demo" onclick="{{button_onclick}}">{{button_text}}</button>
+            {{/if}}
+            <button data-text-swap="Show" class="pull-right btn btn-default btn-sm btn-show-more">Show more &gt;&gt;</button>
+            <div class="demo-description">{{description}}</div>
+            <ul class="nav nav-tabs">
+                {{#each tabs}}
+                <li role="presentation" {{#unless @index}} class="active" {{/unless}}><a href="#{{tabId}}Tab" data-toggle="tab">{{title}}</a></li>
+                {{/each}}
+            </ul>
+        </div>
+        <div class="panel-footer minimized" id="{{id}}PanelFooter">
+            <div class="tab-content">
+                {{#each tabs}}
+                <div class="tab-pane {{#unless @index}}in active{{/unless}}" id="{{tabId}}Tab">
+<div class="{{tabContentClass}}" id="{{tabId}}Content">
+</div>
+                </div>
+                {{/each}}
+            </div>
+            <div class="blur-panel"></div>
+        </div>
+    </section>
+</script>
+
+<script>
+    // Describe the demo panels to display in this page.
+    var demos = [
+        {
+            id : "diet",
+            description : "Call API in order to solve a simple file problem.",
+            button_text : "Solve a problem",
+            button_onclick: "showResult(solve('Diet'), 'diet', true)",
+            tabs : [
+                {
+                    title : 'Source',
+                    tabId: 'dietSrc',
+                    tabContentClass : 'demo-code',
+                    file : "samples/solvediet.html"
+                },
+                {
+                    title : 'Input',
+                    tabId: 'dietInput',
+                    tabContentClass : 'demo-code',
+                    file : "samples/diet.html"
+                },
+                {
+                    title : 'Solution',
+                    tabId : 'dietSolution',
+                    tabContentClass: 'demo-solution'
+                },
+                {
+                    title : 'Job info',
+                    tabId : 'dietJobInfo',
+                    tabContentClass: 'demo-solution'
+                }
+            ]
+        },
+        {
+            id : "additionalFeatures",
+            description : "Additional source samples",
+            tabs : [
+                {
+                    title : 'List jobs',
+                    tabId: 'listJobs',
+                    file : "samples/jobinfo.html",
+                    tabContentClass : 'demo-code'
+                },
+                {
+                    title : 'Download result',
+                    tabId: 'download',
+                    file : "samples/download.html",
+                    tabContentClass : 'demo-code'
+                },
+                {
+                    title : 'Solve OPL problem',
+                    tabId: 'solveSteelmill',
+                    file : "samples/solveSteelmill.html",
+                    tabContentClass : 'demo-code'
+                }
+            ]
+        },
+        {
+            id : "deleteAll",
+            description : "Deletes all your existing jobs when you have reached the maximum number of jobs allowed with your subscription",
+            button_text : "Delete all the jobs",
+            button_onclick: "showResult(deleteAll(), 'deleteAll')",
+            tabs : [
+                {
+                    title : 'Source',
+                    tabId: 'deleteAllSrc',
+                    file : "samples/deleteall.html",
+                    tabContentClass : 'demo-code'
+                },
+                {
+                    title : 'Result',
+                    tabId : 'deleteAllJobInfo',
+                    tabContentClass: 'demo-solution'
+                }
+            ]
+        }
+    ];
+
+    /**
+     * Collapses/expands a demo panel.
+     * @param demoNode a DOM element or an event targeting a DOM element of the demo panel to collapse or expand.
+     * @param collapsed if undefined, the demo panel is expanded if was previously collapsed or is collapsed if was
+     * previously expanded. Otherwise, the demo panel is collapsed if true or expanded if false.
+     */
+    function toggleCollapseDemo(demoNode, collapsed) {
+        // Find the collapsible panel of the demo panel.
+        var $demoPanel = $(demoNode.target || demoNode).closest('.demo-panel');
+        var $panelFooter = $demoPanel.find('.panel-footer');
+        // Expand or collapse it
+        $panelFooter.toggleClass('minimized', collapsed);
+        // Change the text of the collapse/expand button depending on the collapse state of the panel
+        $demoPanel.find('.btn-show-more').html(collapsed? "Show more >>" : "Show less <<");
+    }
+
+    /**
+     * Displays the result provided with the resultPromise in the solution tab of the demoId panel.
+     * @param resultPromise the promise that provides the result from the server.
+     * @param demoId the id of the demo panel to display the result into.
+     * @param hasSolution if true, the operation result involves the display of a solution.
+     */
+    function showResult(resultPromise, demoId, hasSolution) {
+        // Select the solution tab
+        $('.nav-tabs a[href="#' + demoId + (hasSolution? 'SolutionTab' : 'JobInfoTab' + '"]')).tab('show');
+        toggleCollapseDemo($('#' + demoId + 'PanelFooter')[0], false);
+        var $jobInfo = $("#" + demoId + "JobInfoContent");
+        $jobInfo.html("<img src='images/loading-wheel.gif'>");
+
+        var $solution;
+        if (hasSolution) {
+            $solution = $("#" + demoId + "SolutionContent");
+            $solution.html("<img src='images/loading-wheel.gif'>");
+        }
+        resultPromise.done(function(data) {
+            // Convert the result into a string for display
+            if (!data || ($.type(data) === 'string')) {
+                $jobInfo.html('<pre>' + data + '</pre>');
+            }
+            else {
+                var dateFields = ["createdAt", "submittedAt", "startedAt", "endedAt", "updatedAt"];
+                $jobInfo.empty();
+                makeTree(demoId + "JobInfoContent", data, {
+                    convertValue: function (key, value) {
+                        if (dateFields.indexOf(key) >= 0) {
+                            return new Date(value).toLocaleString();
+                        }
+                        return value;
+                    }
+                });
+                if (hasSolution) {
+                    $solution.empty();
+                    $solution.html('<div class="download-panel"><form method="get" action="/downloadSolution/' + data._id + '"><button type="submit" class="pull-right btn btn-default btn-sm">Download</button></form></div>');
+                    var treeId = demoId + 'SolutionTree';
+                    $result = $('<div id="' + treeId + '"></div>');
+                    $.getJSON( '/getSolution/' + data._id).then(function (solution) {
+                        makeTree(treeId, solution, {
+                            convertValue: function (key, value) {
+                                if (dateFields.indexOf(key) >= 0) {
+                                    return new Date(value).toLocaleString();
+                                }
+                                return value;
+                            }
+                        });
+                    });
+                    $solution.append($result);
+                }
+            }
+        }).fail(function (response) {
+            $jobInfo.html('<br><div class="alert-danger">' + response.responseText + '</div>');
+            if (hasSolution) {
+                $solution.html('<br><div class="alert-danger">' + response.responseText + '</div>');
+            }
+        });
+    }
+
+    // Constructs the demo panels.
+    var source = $("#demoPanel").html();
+    var template = Handlebars.compile(source);
+    var $demoCtnr = $("#demos");
+    demos.map(function (demo) {
+        // Create a new demo panel based on the demo data
+        var $html = $(template(demo));
+        // Load resource files for each tabs specifying a file
+        demo.tabs.map(function (tab) {
+            if (tab.file) {
+                $html.find('#' + tab.tabId + 'Content').load(tab.file);
+            }
+        });
+        $demoCtnr.append($html);
+        // Handle the Show more >> / Show Less << button.
+        $html.find(".btn-show-more").on("click", toggleCollapseDemo);
+    });
+</script>
+
+</body>
+</html>
