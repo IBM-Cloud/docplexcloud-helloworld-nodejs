@@ -14,15 +14,7 @@
  * limitations under the License.
  */
  
- //functions used by buttons
 
-/**
- * Returns the list of jobs.
- * @returns {Promise} a promise that resolves once the Http request returns.
- */
-function getJobList() {
-    return $.get('/jobList');
-}
 
 /**
  * Waits for the job with the specified jobId to complete or fail.
@@ -77,8 +69,4 @@ function deleteAll() {
         console.log('Error deleting jobs');
         return err.message;
     });
-}
-
-function jobInfo() {
-    return $.get('/jobInfo');
 }
