@@ -11,7 +11,10 @@
 		"docplexcloud-nodejs-api":"*",
 		"cf-deployment-tracker-client": "*"
 	},
-	"repository": {},
+	"repository": {
+    	"type": "git",
+   	"url": "https://github.com/IBM-Bluemix/docplexcloud-helloworld-nodejs.git"
+	},
 	"engines": {
 		"node": "4.x"
 	},
