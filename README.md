@@ -1,6 +1,6 @@
 # DOcplexcloud NodeJS Sample
 
-[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/IBM-Bluemix/docplexcloud-helloworld-nodejs.git)
+[![Deploy to Bluemix](https://deployment-tracker.mybluemix.net/stats/3133b73c73c7d9b58158b28dbfa4975f/button.svg)](https://bluemix.net/deploy?repository=https://github.com/IBM-Bluemix/docplexcloud-helloworld-nodejs.git)
 
 IBM Decision Optimization on Cloud for Bluemix (DOcplexcloud) allows you to solve optimization problems on the cloud without installing or configuring a solver. We handle the connection so that you can jump into coding faster.
 
