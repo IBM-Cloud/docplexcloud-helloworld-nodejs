@@ -32,6 +32,9 @@ var docplexcloudservice;
 var docplexcloudURL;
 var docplexcloudClientId;
 
+var port = (process.env.VCAP_APP_PORT || 3000);
+var host = (process.env.VCAP_APP_HOST || 'localhost');
+
 //get all services in vcap
 //if we're in CF or Bluemix, don't need to specify services manually
 if (process.env.VCAP_SERVICES) {
