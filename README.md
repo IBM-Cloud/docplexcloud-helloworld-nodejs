@@ -1,7 +1,5 @@
-# DOcplexcloud NodeJS Sample
-
-[![Deploy to Bluemix](https://deployment-tracker.mybluemix.net/stats/3133b73c73c7d9b58158b28dbfa4975f/button.svg)](https://bluemix.net/deploy?repository=https://github.com/IBM-Bluemix/docplexcloud-helloworld-nodejs.git)
-
+# Decision Optimization NodeJS Sample
+## Introduction
 IBM Decision Optimization on Cloud for Bluemix (DOcplexcloud) allows you to solve optimization problems on the cloud without installing or configuring a solver. We handle the connection so that you can jump into coding faster.
 
 This sample shows how you can build a simple Node.js application that will use [Decision Optimization on Cloud for Bluemix Service](https://console.ng.bluemix.net/catalog/services/decision-optimization/)
@@ -17,24 +15,38 @@ Some buttons have been added to enable interaction with DOcplexcloud:
  
  You can also benefit from code samples, to go further.
 
+There are two ways to deploy the sample to Bluemix:
+  - automatically in one click.
+  - Or by cloning the sample to your local environment
+
+## Automatically deploy the sample
+Note that you need to have a Bluemix account. 
+[Sign up](http://www.ibm.com/cloud-computing/bluemix/) for Bluemix, or use an existing account.
+
+Click the button below:
+
+[![Deploy to Bluemix](https://deployment-tracker.mybluemix.net/stats/3133b73c73c7d9b58158b28dbfa4975f/button.svg)](https://bluemix.net/deploy?repository=https://github.com/IBM-Bluemix/docplexcloud-helloworld-nodejs.git)
+
+Then just follow Bluemix instruction during & after deployment
+
+## Deploy the sample step by step
+Note that you need to have a Bluemix account. 
+[Sign up](http://www.ibm.com/cloud-computing/bluemix/) for Bluemix, or use an existing account.
 
 
 ### Running the app on Bluemix
-1. Create a Bluemix Account
 
-    [Sign up](http://www.ibm.com/cloud-computing/bluemix/) for Bluemix, or use an existing account.
+1. Download and install the [Cloud-foundry CLI](https://github.com/cloudfoundry/cli) tool
 
-2. Download and install the [Cloud-foundry CLI](https://github.com/cloudfoundry/cli) tool
-
-3. Clone the app to your local environment from your terminal using the following command
+2. Clone the app to your local environment from your terminal using the following command
 
    ```
    git clone https://github.com/IBM-Bluemix/docplexcloud-helloworld-nodejs.git
    ```
 
-4. cd into this newly created directory
+3. cd into this newly created directory
 
-5. Edit the `manifest.yml` file and change the `<application-name>` and `<application-host>` from `DOcplexcloud-app` to something unique.
+4. Edit the `manifest.yml` file and change the `<application-name>` and `<application-host>` from `DOcplexcloud-app` to something unique.
 
 	```
     applications:
@@ -48,19 +60,19 @@ Some buttons have been added to enable interaction with DOcplexcloud:
   The host you use will determinate your application url initially, e.g. `<application-host>.mybluemix.net`.  
   **Note:** If you use a name other than `DOcplexcloud-service` for the service name, you need to update this in the `app.js` file.
 
-6. Connect to Bluemix in the command line tool and follow the prompts to log in.
+5. Connect to Bluemix in the command line tool and follow the prompts to log in.
 
 	```
 	cf api https://api.ng.bluemix.net
 	cf login
 	```
-7. Create the Decision Optimization for IBM Bluemix service.
+6. Create the Decision Optimization for IBM Bluemix service.
 
    ```
    cf create-service docplexcloud ODSTRIAL DOcplexcloud-service
    ```
 
-8. Push the application to Bluemix.
+7. Push the application to Bluemix.
 
    ```
    cf push
