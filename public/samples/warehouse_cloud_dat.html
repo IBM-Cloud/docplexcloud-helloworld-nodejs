@@ -1,0 +1,73 @@
+<!-- HTML generated using hilite.me --><div><pre style="margin: 0;">
+// 10 stores to be opened.
+plan = <span style="color: #007700">&lt;10&gt;</span>;
+
+warehouses =
+{
+    <span style="color: #007700">&lt;Bonn</span>    <span style="color: #FF0000">,</span> <span style="color: #0000CC">1</span><span style="color: #FF0000">,</span> <span style="color: #0000CC">30</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Bordeaux</span><span style="color: #FF0000">,</span> <span style="color: #0000CC">4</span><span style="color: #FF0000">,</span> <span style="color: #0000CC">30</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;London</span>  <span style="color: #FF0000">,</span> <span style="color: #0000CC">2</span><span style="color: #FF0000">,</span> <span style="color: #0000CC">30</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Paris</span>   <span style="color: #FF0000">,</span> <span style="color: #0000CC">1</span><span style="color: #FF0000">,</span> <span style="color: #0000CC">30</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Rome</span>    <span style="color: #FF0000">,</span> <span style="color: #0000CC">3</span><span style="color: #FF0000">,</span> <span style="color: #0000CC">30</span><span style="color: #007700">&gt;</span>
+};
+
+supplyCosts =
+{
+    <span style="color: #007700">&lt;Bonn</span><span style="color: #FF0000">,</span><span style="color: #0000CC">1</span><span style="color: #FF0000">,</span><span style="color: #0000CC">20</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Bonn</span><span style="color: #FF0000">,</span><span style="color: #0000CC">2</span><span style="color: #FF0000">,</span><span style="color: #0000CC">28</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Bonn</span><span style="color: #FF0000">,</span><span style="color: #0000CC">3</span><span style="color: #FF0000">,</span><span style="color: #0000CC">74</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Bonn</span><span style="color: #FF0000">,</span> <span style="color: #0000CC">4</span><span style="color: #FF0000">,</span><span style="color: #0000CC">2</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Bonn</span><span style="color: #FF0000">,</span><span style="color: #0000CC">5</span><span style="color: #FF0000">,</span><span style="color: #0000CC">46</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Bonn</span><span style="color: #FF0000">,</span><span style="color: #0000CC">6</span><span style="color: #FF0000">,</span><span style="color: #0000CC">42</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Bonn</span><span style="color: #FF0000">,</span><span style="color: #0000CC">7</span><span style="color: #FF0000">,</span><span style="color: #0000CC">1</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Bonn</span><span style="color: #FF0000">,</span><span style="color: #0000CC">8</span><span style="color: #FF0000">,</span><span style="color: #0000CC">10</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Bonn</span><span style="color: #FF0000">,</span><span style="color: #0000CC">9</span><span style="color: #FF0000">,</span><span style="color: #0000CC">93</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Bonn</span><span style="color: #FF0000">,</span><span style="color: #0000CC">10</span><span style="color: #FF0000">,</span><span style="color: #0000CC">47</span><span style="color: #007700">&gt;</span>
+  
+  , <span style="color: #007700">&lt;Bordeaux</span><span style="color: #FF0000">,</span><span style="color: #0000CC">1</span><span style="color: #FF0000">,</span><span style="color: #0000CC">24</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Bordeaux</span><span style="color: #FF0000">,</span><span style="color: #0000CC">2</span><span style="color: #FF0000">,</span><span style="color: #0000CC">27</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Bordeaux</span><span style="color: #FF0000">,</span><span style="color: #0000CC">3</span><span style="color: #FF0000">,</span><span style="color: #0000CC">97</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Bordeaux</span><span style="color: #FF0000">,</span><span style="color: #0000CC">4</span><span style="color: #FF0000">,</span><span style="color: #0000CC">55</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Bordeaux</span><span style="color: #FF0000">,</span><span style="color: #0000CC">5</span><span style="color: #FF0000">,</span><span style="color: #0000CC">96</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Bordeaux</span><span style="color: #FF0000">,</span><span style="color: #0000CC">6</span><span style="color: #FF0000">,</span><span style="color: #0000CC">22</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Bordeaux</span><span style="color: #FF0000">,</span><span style="color: #0000CC">7</span><span style="color: #FF0000">,</span><span style="color: #0000CC">5</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Bordeaux</span><span style="color: #FF0000">,</span><span style="color: #0000CC">8</span><span style="color: #FF0000">,</span><span style="color: #0000CC">73</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Bordeaux</span><span style="color: #FF0000">,</span><span style="color: #0000CC">9</span><span style="color: #FF0000">,</span><span style="color: #0000CC">35</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Bordeaux</span><span style="color: #FF0000">,</span><span style="color: #0000CC">10</span><span style="color: #FF0000">,</span><span style="color: #0000CC">65</span><span style="color: #007700">&gt;</span>
+  
+  , <span style="color: #007700">&lt;London</span><span style="color: #FF0000">,</span><span style="color: #0000CC">1</span><span style="color: #FF0000">,</span><span style="color: #0000CC">11</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;London</span><span style="color: #FF0000">,</span><span style="color: #0000CC">2</span><span style="color: #FF0000">,</span><span style="color: #0000CC">82</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;London</span><span style="color: #FF0000">,</span><span style="color: #0000CC">3</span><span style="color: #FF0000">,</span><span style="color: #0000CC">71</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;London</span><span style="color: #FF0000">,</span><span style="color: #0000CC">4</span><span style="color: #FF0000">,</span><span style="color: #0000CC">73</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;London</span><span style="color: #FF0000">,</span><span style="color: #0000CC">5</span><span style="color: #FF0000">,</span><span style="color: #0000CC">59</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;London</span><span style="color: #FF0000">,</span><span style="color: #0000CC">6</span><span style="color: #FF0000">,</span><span style="color: #0000CC">29</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;London</span><span style="color: #FF0000">,</span><span style="color: #0000CC">7</span><span style="color: #FF0000">,</span><span style="color: #0000CC">73</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;London</span><span style="color: #FF0000">,</span><span style="color: #0000CC">8</span><span style="color: #FF0000">,</span><span style="color: #0000CC">13</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;London</span><span style="color: #FF0000">,</span><span style="color: #0000CC">9</span><span style="color: #FF0000">,</span><span style="color: #0000CC">63</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;London</span><span style="color: #FF0000">,</span><span style="color: #0000CC">10</span><span style="color: #FF0000">,</span><span style="color: #0000CC">55</span><span style="color: #007700">&gt;</span>
+  
+  , <span style="color: #007700">&lt;Paris</span><span style="color: #FF0000">,</span><span style="color: #0000CC">1</span><span style="color: #FF0000">,</span><span style="color: #0000CC">25</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Paris</span><span style="color: #FF0000">,</span><span style="color: #0000CC">2</span><span style="color: #FF0000">,</span><span style="color: #0000CC">83</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Paris</span><span style="color: #FF0000">,</span><span style="color: #0000CC">3</span><span style="color: #FF0000">,</span><span style="color: #0000CC">96</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Paris</span><span style="color: #FF0000">,</span><span style="color: #0000CC">4</span><span style="color: #FF0000">,</span><span style="color: #0000CC">69</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Paris</span><span style="color: #FF0000">,</span><span style="color: #0000CC">5</span><span style="color: #FF0000">,</span><span style="color: #0000CC">83</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Paris</span><span style="color: #FF0000">,</span><span style="color: #0000CC">6</span><span style="color: #FF0000">,</span><span style="color: #0000CC">67</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Paris</span><span style="color: #FF0000">,</span><span style="color: #0000CC">7</span><span style="color: #FF0000">,</span><span style="color: #0000CC">59</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Paris</span><span style="color: #FF0000">,</span><span style="color: #0000CC">8</span><span style="color: #FF0000">,</span><span style="color: #0000CC">43</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Paris</span><span style="color: #FF0000">,</span><span style="color: #0000CC">9</span><span style="color: #FF0000">,</span><span style="color: #0000CC">85</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Paris</span><span style="color: #FF0000">,</span><span style="color: #0000CC">10</span><span style="color: #FF0000">,</span><span style="color: #0000CC">71</span><span style="color: #007700">&gt;</span>
+  
+  , <span style="color: #007700">&lt;Rome</span><span style="color: #FF0000">,</span><span style="color: #0000CC">1</span><span style="color: #FF0000">,</span><span style="color: #0000CC">30</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Rome</span><span style="color: #FF0000">,</span><span style="color: #0000CC">2</span><span style="color: #FF0000">,</span><span style="color: #0000CC">74</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Rome</span><span style="color: #FF0000">,</span><span style="color: #0000CC">3</span><span style="color: #FF0000">,</span><span style="color: #0000CC">70</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Rome</span><span style="color: #FF0000">,</span><span style="color: #0000CC">4</span><span style="color: #FF0000">,</span><span style="color: #0000CC">61</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Rome</span><span style="color: #FF0000">,</span><span style="color: #0000CC">5</span><span style="color: #FF0000">,</span><span style="color: #0000CC">4</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Rome</span><span style="color: #FF0000">,</span><span style="color: #0000CC">6</span><span style="color: #FF0000">,</span><span style="color: #0000CC">59</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Rome</span><span style="color: #FF0000">,</span><span style="color: #0000CC">7</span><span style="color: #FF0000">,</span><span style="color: #0000CC">56</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Rome</span><span style="color: #FF0000">,</span><span style="color: #0000CC">8</span><span style="color: #FF0000">,</span><span style="color: #0000CC">96</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Rome</span><span style="color: #FF0000">,</span><span style="color: #0000CC">9</span><span style="color: #FF0000">,</span><span style="color: #0000CC">46</span><span style="color: #007700">&gt;</span>
+  , <span style="color: #007700">&lt;Rome</span><span style="color: #FF0000">,</span><span style="color: #0000CC">10</span><span style="color: #FF0000">,</span><span style="color: #0000CC">95</span><span style="color: #007700">&gt;</span>
+  
+};
+</pre>
+</div>

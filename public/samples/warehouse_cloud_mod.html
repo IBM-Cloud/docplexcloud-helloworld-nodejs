@@ -1,0 +1,73 @@
+<!-- HTML generated using hilite.me --><div><pre style="margin: 0;">
+tuple TWarehouse {
+  key string name;
+  <span style="color: #008800; font-weight: bold">int</span> capacity;
+  <span style="color: #008800; font-weight: bold">float</span> fixedCost;
+}
+
+tuple TSupplyCost {
+   key string warehouseName;
+   key <span style="color: #008800; font-weight: bold">int</span> storeId;
+   <span style="color: #008800; font-weight: bold">float</span> cost;
+}
+
+tuple TPlan {
+   <span style="color: #008800; font-weight: bold">int</span> nbStores;
+}
+
+TPlan plan <span style="color: #333333">=</span> ...;
+{TWarehouse} warehouses <span style="color: #333333">=</span> ...;
+{TSupplyCost} supplyCosts <span style="color: #333333">=</span> ...;
+
+range stores <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">1</span>..plan.nbStores;
+
+dvar <span style="color: #008800; font-weight: bold">boolean</span> Open[ warehouses ];
+dvar <span style="color: #008800; font-weight: bold">boolean</span> Supply[ stores ][ warehouses ];
+
+<span style="color: #888888">// expression</span>
+dexpr <span style="color: #008800; font-weight: bold">float</span> totalOpeningCost <span style="color: #333333">=</span> sum( w <span style="color: #008800; font-weight: bold">in</span> warehouses ) w.fixedCost <span style="color: #333333">*</span> Open[w];
+dexpr <span style="color: #008800; font-weight: bold">float</span> totalSupplyCost  <span style="color: #333333">=</span> sum( w <span style="color: #008800; font-weight: bold">in</span> warehouses , s <span style="color: #008800; font-weight: bold">in</span> stores, k <span style="color: #008800; font-weight: bold">in</span> supplyCosts <span style="color: #333333">:</span> k.storeId <span style="color: #333333">==</span> s <span style="color: #333333">&amp;&amp;</span> k.warehouseName <span style="color: #333333">==</span> w.name ) 
+    Supply[s][w] <span style="color: #333333">*</span> k.cost;
+
+minimize
+  totalOpeningCost <span style="color: #333333">+</span> totalSupplyCost;
+
+subject to {
+  forall( s <span style="color: #008800; font-weight: bold">in</span> stores )
+    ctEachStoreHasOneWarehouse<span style="color: #333333">:</span>
+      sum( w <span style="color: #008800; font-weight: bold">in</span>  warehouses ) Supply[s][w] <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">1</span>;
+      
+  forall( w <span style="color: #008800; font-weight: bold">in</span> warehouses, s <span style="color: #008800; font-weight: bold">in</span> stores )
+    ctUseOpenWarehouses<span style="color: #333333">:</span>
+      Supply[s][w] <span style="color: #333333">&lt;=</span> Open[w];
+      
+  forall( w <span style="color: #008800; font-weight: bold">in</span> warehouses )
+    ctMaxUseOfWarehouse<span style="color: #333333">:</span>         
+      sum( s <span style="color: #008800; font-weight: bold">in</span> stores) Supply[s][w] <span style="color: #333333">&lt;=</span> w.capacity;
+}
+
+
+{<span style="color: #008800; font-weight: bold">int</span>} StoresSupplied[w <span style="color: #008800; font-weight: bold">in</span> warehouses] <span style="color: #333333">=</span> { s <span style="color: #333333">|</span> s <span style="color: #008800; font-weight: bold">in</span> stores <span style="color: #333333">:</span> Supply[s][w] <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">1</span> };
+{string} OpenWarehouses <span style="color: #333333">=</span> { w.name <span style="color: #333333">|</span> w <span style="color: #008800; font-weight: bold">in</span> warehouses <span style="color: #333333">:</span> Open[w] <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">1</span> };
+tuple TSuppliedStore {
+  string warehouseName;
+  <span style="color: #008800; font-weight: bold">int</span> storeId;
+}
+{TSuppliedStore} network;
+
+execute DISPLAY_RESULTS{
+  network.clear();
+  writeln(<span style="background-color: #fff0f0">&quot;* Open Warehouses=&quot;</span>, OpenWarehouses);
+  <span style="color: #008800; font-weight: bold">for</span> ( <span style="color: #008800; font-weight: bold">var</span> w <span style="color: #008800; font-weight: bold">in</span> warehouses) {
+     <span style="color: #008800; font-weight: bold">if</span> ( Open[w] <span style="color: #333333">==</span><span style="color: #0000DD; font-weight: bold">1</span>)   {
+        writeln(<span style="background-color: #fff0f0">&quot;* stores supplied by &quot;</span>, w.name, <span style="background-color: #fff0f0">&quot;: &quot;</span>, StoresSupplied[w]);
+	<span style="color: #008800; font-weight: bold">for</span> (<span style="color: #008800; font-weight: bold">var</span> s <span style="color: #008800; font-weight: bold">in</span> stores) {
+	  <span style="color: #008800; font-weight: bold">if</span> (Supply[s][w] <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">1</span>) {
+	    network.addOnly(w.name, s);
+	  }
+	}
+     }
+  }
+}
+ 
+</pre></div>

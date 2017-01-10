@@ -18,45 +18,64 @@
 <html>
 
 <head>
-    <title>NodeJS (DOcplexcloud) Starter Application</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NodeJS (DOcplexcloud) Starter Application</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
+<script
+	src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
 
-    <!--  Bootstrap  -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" crossorigin="anonymous">
+<!--  Bootstrap  -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	crossorigin="anonymous">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"
+	crossorigin="anonymous">
 
-    <link rel="stylesheet" href="stylesheets/style.css">
-    <script src="js/tree.js"></script>
-    <script src="js/client.js"></script>
+<link rel="stylesheet" href="stylesheets/style.css">
+<script src="js/tree.js"></script>
+<script src="js/client.js"></script>
 </head>
 
 <body>
-<!--built-in from bluemix toolkit-->
-<div class="h-center" id="demos">
-    <section class="header">
-            <h1>Hi there!</h1>
-            <p>Thanks for creating a
-                <span class="blue">NodeJS (DOcplexcloud) Starter Application</span>.
-            </p>
+	<!--built-in from bluemix toolkit-->
+	<div class="h-center" id="demos">
+		<section class="header">
             <p>
-                Below is a visualization of commands accessible from DOcplexcloud NodeJS client,<br>
-                this API enables to submit a problem to solve, see job info, download solution file, and delete jobs.
-            </p>
-            <p>
-                Click on the buttons below to play with the DOcplexcloud API service.
-            </p>
-    </section>
-</div>
+				<b>The interface of the <span style="color: orange">NodeJS</span>
+					sample illustrates the <span style="color: orange">3 main
+						commands of the API</span>, <br>(named 
+						DOcplexcloud API) for solving an
+					optimization problem.
+				</b>
+			</p>
+			<p>The optimization problem used by default in this sample is
+				about finding the best location to <br> build a warehouse so that it can
+				supply its existing stores at a minimal cost. <br>The problem is
+				formalized in the model file warehouse.mod and data in the
+				warehouse.dat file.
+				<br>Learn more on the optimization problems provided with the 
+				sample : <a style="color:#00b299" href="https://dropsolve-oaas.docloud.ibmcloud.com/resources/samples/zip/Warehouse-location.zip">warehouse.pdf</a>,
+				<a style="color:#00b299" href="https://dropsolve-oaas.docloud.ibmcloud.com/resources/samples/zip/Steel-mill-slab-design.zip">seelmill.pdf</a>.</p>
+			
+		</section>
+	</div>
 
-<!--Handlebars Template for a demo panel-->
-<script type='text/template' id='demoPanel'>
+	<!--Handlebars Template for a demo panel-->
+	<script type='text/template' id='demoPanel'>
     <section class="demo-panel panel panel-default">
         <div class="panel-body">
             {{#if button_text}}
@@ -84,61 +103,57 @@
     </section>
 </script>
 
-<script>
+	<script>
     // Describe the demo panels to display in this page.
     var demos = [
         {
-            id : "diet",
-            description : "Call API in order to solve a simple file problem.",
-            button_text : "Solve a problem",
-            button_onclick: "showResult(solve('Diet'), 'diet', true)",
+            id : "warehouse",
+            description : "Create a job by uploading the optimization problem file(s), usually a model and data files, and submit the job to be executed on the CPLEX Optimization solver on cloud.",
+            button_text : "Submit a job",
+            button_onclick: "showResult(solve('Warehouse'), 'warehouse', true)",
             tabs : [
                 {
                     title : 'Source',
-                    tabId: 'dietSrc',
+                    tabId: 'warehouseSrc',
                     tabContentClass : 'demo-code',
-                    file : "samples/solvediet.html"
+                    file : "samples/solvewarehouse.html"
                 },
                 {
-                    title : 'Input',
-                    tabId: 'dietInput',
+                    title : 'INPUT : Model',
+                    tabId: 'warehouseInput',
                     tabContentClass : 'demo-code',
-                    file : "samples/diet.html"
+                    file : "samples/warehouse_cloud_mod.html"
                 },
                 {
-                    title : 'Solution',
-                    tabId : 'dietSolution',
-                    tabContentClass: 'demo-solution'
+                    title : 'INPUT : Data',
+                    tabId: 'warehouseData',
+                    tabContentClass : 'demo-code',
+                    file : "samples/warehouse_cloud_dat.html"
                 },
                 {
-                    title : 'Job info',
-                    tabId : 'dietJobInfo',
+                    title : 'Job execution info',
+                    tabId : 'warehouseJobInfo',
                     tabContentClass: 'demo-solution'
                 }
             ]
         },
         {
-            id : "additionalFeatures",
-            description : "Additional source samples",
+            id : "download",
+            description : "To get the results download the results file.",
+            button_text : "Download Results",
+            button_onclick: "showResult(solve('Warehouse'), 'download', true)",
             tabs : [
-                {
-                    title : 'List jobs',
-                    tabId: 'listJobs',
-                    file : "samples/jobinfo.html",
-                    tabContentClass : 'demo-code'
-                },
-                {
-                    title : 'Download result',
+				{
+                    title : 'Source',
                     tabId: 'download',
                     file : "samples/download.html",
                     tabContentClass : 'demo-code'
                 },
                 {
-                    title : 'Solve OPL problem',
-                    tabId: 'solveSteelmill',
-                    file : "samples/solveSteelmill.html",
-                    tabContentClass : 'demo-code'
-                }
+                    title : 'OUTPUT : Results',
+                    tabId : 'warehouseSolution',
+                    tabContentClass: 'demo-solution'
+                },
             ]
         },
         {
@@ -153,8 +168,9 @@
                     file : "samples/deleteall.html",
                     tabContentClass : 'demo-code'
                 },
+                
                 {
-                    title : 'Result',
+                    title : 'Info',
                     tabId : 'deleteAllJobInfo',
                     tabContentClass: 'demo-solution'
                 }
@@ -256,6 +272,13 @@
         $html.find(".btn-show-more").on("click", toggleCollapseDemo);
     });
 </script>
+	<footer>
+		<p>
+		<br>Find out more about APIs on the 
+		<a style="color:#00b299" href="https://developer.ibm.com/docloud/documentation/docloud/">DOcplexcoud APIs</a>
+		 page of our Decision Optimization  Dev Center.
 
+		</p>
+	</footer>
 </body>
 </html>

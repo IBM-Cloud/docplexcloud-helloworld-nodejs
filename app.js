@@ -114,12 +114,13 @@ function solve(files, req, res) {
   console.log('works');
 }
 
+
+
 /**
- * Entry point for solving the Diet problem.
- * Request triggered when clicking on the 'Solve a problem' button.
+ * Entry point for solving the Warehouse problem, sending two file attachments.
  */
-app.post('/solveDiet', function (req, res) {
-  solve(['diet.lp'], req, res);
+app.post('/solveWarehouse', function (req, res) {
+ solve(['warehouse_cloud.mod', 'warehouse_cloud.dat'], req, res);
 });
 
 /**
@@ -162,6 +163,14 @@ app.delete('/deleteAll', function (req, res) {
 // other job management features could be implemented.
 //
 //
+
+/**
+ * Entry point for solving the Diet problem.
+ * Request triggered when clicking on the 'Solve a problem' button.
+ */
+app.post('/solveDiet', function (req, res) {
+  solve(['diet.lp'], req, res);
+});
 
 /**
  * Entry point for solving the Steelmill problem, sending two file attachments
