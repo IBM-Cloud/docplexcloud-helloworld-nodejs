@@ -56,20 +56,17 @@
 		<section class="header">
             <p>
 				<b>The interface of the <span style="color: orange">NodeJS</span>
-					sample illustrates the <span style="color: orange">3 main
-						commands of the API</span>, <br>(named 
-						DOcplexcloud API) for solving an
+					sample illustrates the <span style="color: orange">three main
+						commands of the DOcplexcloud API</span>, for solving an
 					optimization problem.
 				</b>
 			</p>
-			<p>The optimization problem used by default in this sample is
-				about finding the best location to <br> build a warehouse so that it can
-				supply its existing stores at a minimal cost. <br>The problem is
-				formalized in the model file warehouse.mod and data in the
-				warehouse.dat file.
-				<br>Learn more on the optimization problems provided with the 
-				sample : <a style="color:#00b299" href="https://dropsolve-oaas.docloud.ibmcloud.com/resources/samples/zip/Warehouse-location.zip">warehouse.pdf</a>,
-				<a style="color:#00b299" href="https://dropsolve-oaas.docloud.ibmcloud.com/resources/samples/zip/Steel-mill-slab-design.zip">seelmill.pdf</a>.</p>
+			<p>The optimization problem in this sample is
+				about finding the best location to build a warehouse so that it can
+				supply its existing stores at a minimal cost. The problem is
+				formalized in the model file <span style="font-family: courier">warehouse.mod</span>. The data is in the
+				file <span style="font-family: courier">warehouse.dat</span>.
+				Learn more about this optimization problem: <a style="color:#00b299" href="https://dropsolve-oaas.docloud.ibmcloud.com/resources/samples/zip/Warehouse-location.zip">warehouse.zip</a>.</p>
 			
 		</section>
 	</div>
@@ -78,8 +75,12 @@
 	<script type='text/template' id='demoPanel'>
     <section class="demo-panel panel panel-default">
         <div class="panel-body">
-            {{#if button_text}}
-            <button type="button" class="btn btn-demo" onclick="{{button_onclick}}">{{button_text}}</button>
+            {{#if button_download}}
+            <div class="download-panel"><form method="get" id="downloadResultsForm" action="/downloadSolution/' + data._id + '"><button type="submit" class="btn btn-demo">{{button_text}}</button></form></div>
+            {{else}}
+                {{#if button_text}}
+                    <button type="button" class="btn btn-demo" onclick="{{button_onclick}}">{{button_text}}</button>
+                {{/if}}
             {{/if}}
             <button data-text-swap="Show" class="pull-right btn btn-default btn-sm btn-show-more">Show more &gt;&gt;</button>
             <div class="demo-description">{{description}}</div>
@@ -108,9 +109,9 @@
     var demos = [
         {
             id : "warehouse",
-            description : "Create a job by uploading the optimization problem file(s), usually a model and data files, and submit the job to be executed on the CPLEX Optimization solver on cloud.",
+            description : "Create a job by uploading the optimization problem file(s), usually a model and data files, and submit the job to be executed on the CPLEX Optimization solver.",
             button_text : "Submit a job",
-            button_onclick: "showResult(solve('Warehouse'), 'warehouse', true)",
+            button_onclick: "showResult(solve('Warehouse'), 'warehouse', 'warehouseJobInfo', true)",
             tabs : [
                 {
                     title : 'Source',
@@ -119,13 +120,13 @@
                     file : "samples/solvewarehouse.html"
                 },
                 {
-                    title : 'INPUT : Model',
+                    title : 'INPUT: Model',
                     tabId: 'warehouseInput',
                     tabContentClass : 'demo-code',
                     file : "samples/warehouse_cloud_mod.html"
                 },
                 {
-                    title : 'INPUT : Data',
+                    title : 'INPUT: Data',
                     tabId: 'warehouseData',
                     tabContentClass : 'demo-code',
                     file : "samples/warehouse_cloud_dat.html"
@@ -139,9 +140,10 @@
         },
         {
             id : "download",
-            description : "To get the results download the results file.",
-            button_text : "Download Results",
-            button_onclick: "showResult(solve('Warehouse'), 'download', true)",
+            description : "Download the results file to get the results.",
+            button_download : 'true',
+            button_text : "Download results",
+            button_onclick: "showResult(solve('Warehouse'), 'download', 'warehouseSolution', true)",
             tabs : [
 				{
                     title : 'Source',
@@ -150,17 +152,17 @@
                     tabContentClass : 'demo-code'
                 },
                 {
-                    title : 'OUTPUT : Results',
+                    title : 'OUTPUT: Results',
                     tabId : 'warehouseSolution',
                     tabContentClass: 'demo-solution'
-                },
+                }
             ]
         },
         {
             id : "deleteAll",
-            description : "Deletes all your existing jobs when you have reached the maximum number of jobs allowed with your subscription",
+            description : "Delete all your existing jobs when you have reached the maximum number of jobs allowed with your subscription.",
             button_text : "Delete all the jobs",
-            button_onclick: "showResult(deleteAll(), 'deleteAll')",
+            button_onclick: "showResult(deleteAll(), 'deleteAll', 'deleteAllJobInfo')",
             tabs : [
                 {
                     title : 'Source',
@@ -198,11 +200,12 @@
      * Displays the result provided with the resultPromise in the solution tab of the demoId panel.
      * @param resultPromise the promise that provides the result from the server.
      * @param demoId the id of the demo panel to display the result into.
+     * @param tabSelectId the id of the tab to select to show the result or process info.
      * @param hasSolution if true, the operation result involves the display of a solution.
      */
-    function showResult(resultPromise, demoId, hasSolution) {
+    function showResult(resultPromise, demoId, tabSelectId, hasSolution) {
         // Select the solution tab
-        $('.nav-tabs a[href="#' + demoId + (hasSolution? 'SolutionTab' : 'JobInfoTab' + '"]')).tab('show');
+        $('.nav-tabs a[href="#' + tabSelectId + 'Tab"]').tab('show');
         toggleCollapseDemo($('#' + demoId + 'PanelFooter')[0], false);
         var $jobInfo = $("#" + demoId + "JobInfoContent");
         $jobInfo.html("<img src='images/loading-wheel.gif'>");
@@ -230,7 +233,8 @@
                 });
                 if (hasSolution) {
                     $solution.empty();
-                    $solution.html('<div class="download-panel"><form method="get" action="/downloadSolution/' + data._id + '"><button type="submit" class="pull-right btn btn-default btn-sm">Download</button></form></div>');
+                    //$solution.html('<div class="download-panel"><form method="get" action="/downloadSolution/' + data._id + '"><button type="submit" class="pull-right btn btn-default btn-sm">Download</button></form></div>');
+                    updateDownloadButton(data._id);
                     var treeId = demoId + 'SolutionTree';
                     $result = $('<div id="' + treeId + '"></div>');
                     $.getJSON( '/getSolution/' + data._id).then(function (solution) {
@@ -245,13 +249,22 @@
                     });
                     $solution.append($result);
                 }
+                else {
+                    updateDownloadButton('');
+                }
             }
         }).fail(function (response) {
             $jobInfo.html('<br><div class="alert-danger">' + response.responseText + '</div>');
             if (hasSolution) {
                 $solution.html('<br><div class="alert-danger">' + response.responseText + '</div>');
             }
+            updateDownloadButton('');
         });
+    }
+
+    function updateDownloadButton(jobId) {
+        $('#downloadResultsForm button').prop('disabled', !jobId);
+        $('#downloadResultsForm').attr('action', '/downloadSolution/' + jobId);
     }
 
     // Constructs the demo panels.
@@ -271,12 +284,13 @@
         // Handle the Show more >> / Show Less << button.
         $html.find(".btn-show-more").on("click", toggleCollapseDemo);
     });
+    updateDownloadButton("");
 </script>
 	<footer>
 		<p>
 		<br>Find out more about APIs on the 
 		<a style="color:#00b299" href="https://developer.ibm.com/docloud/documentation/docloud/">DOcplexcoud APIs</a>
-		 page of our Decision Optimization  Dev Center.
+		 page of the Decision Optimization Dev Center.
 
 		</p>
 	</footer>

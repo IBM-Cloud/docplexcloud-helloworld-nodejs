@@ -36,7 +36,7 @@ footer {
 
 a {
     text-decoration: none;
-    color: #00aed1;
+    color: #00AED1;
 }
 
 a:hover {
@@ -54,12 +54,13 @@ section {
 
 section.header {
     background: url("../images/newapp-icon.png") no-repeat left top;
-    background-size: 200px 200px;
+    background-size: 140px 140px;
     padding-left: 250px;
     margin-top: 25px;
     margin-bottom: 30px;
-    min-height: 220px;
+    min-height: 150px;
     display: inline-block;
+    max-width: 800px;
 }
 
 h1 {
@@ -183,7 +184,7 @@ ol.tree li.tree-node-collapsed ol {
 }
 
 .tree a i {
-    padding-right: 6px;
+	padding-right: 6px;
 }
 
 .tree span.treeKey {
