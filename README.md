@@ -1,4 +1,4 @@
-# Decision Optimization NodeJS Sample
+# Decision Optimization for Bluemix Getting Started Sample
 ## Introduction
 
 IBM Decision Optimization for Bluemix (DOcplexcloud) allows  to solve optimization problems on the cloud.

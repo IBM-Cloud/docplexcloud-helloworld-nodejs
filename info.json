@@ -3,7 +3,7 @@
     "provider": [
         "IBM"
     ],
-    "name": "DOcplexcloud NodeJS sample",
+    "name": "Decision Optimization for Bluemix Getting Started sample",
     "model": [
         "Node"
     ],
