@@ -1,25 +1,25 @@
-# Decision Optimization for Bluemix Getting Started Sample
+# Decision Optimization for IBM Cloud Getting Started Sample
 ## Introduction
 
-IBM Decision Optimization for Bluemix (DOcplexcloud) allows  to solve optimization problems on the cloud.
+Decision Optimization for IBM Cloud (DOcplexcloud) allows  to solve optimization problems on the cloud.
 
-This sample shows how you can build a simple Node.js application that use the [Decision Optimization for Bluemix](https://console.ng.bluemix.net/catalog/services/decision-optimization/). It demonstrates how to use the [Node.js Client](https://www.npmjs.com/package/docplexcloud-nodejs-api) to submit a problem to the optimization solver engine (CPLEX)  , get the results and monitor your jobs.
+This sample shows how you can build a simple Node.js application that use the [Decision Optimization for IBM Cloud](https://cloud.ibm.com/catalog/services/decision-optimization/). It demonstrates how to use the [Node.js Client](https://www.npmjs.com/package/docplexcloud-nodejs-api) to submit a problem to the optimization solver engine (CPLEX)  , get the results and monitor your jobs.
 
 There are two ways to deploy the sample to Bluemix, automatically in one click or by cloning the sample to your local environment
 
 ## Automatically deploy the sample
-Note that you need to have a Bluemix account. 
+Note that you need to have an IBM Cloud account. 
 [Sign up](http://www.ibm.com/cloud-computing/bluemix/) for Bluemix, or use an existing account.
 
 Click the button below:
 
-[![Deploy to Bluemix](https://deployment-tracker.mybluemix.net/stats/3133b73c73c7d9b58158b28dbfa4975f/button.svg)](https://bluemix.net/deploy?repository=https://github.com/IBM-Bluemix/docplexcloud-helloworld-nodejs.git)
+[![Deploy to IBM Cloud](https://deployment-tracker.mybluemix.net/stats/3133b73c73c7d9b58158b28dbfa4975f/button.svg)](https://bluemix.net/deploy?repository=https://github.com/IBM-Bluemix/docplexcloud-helloworld-nodejs.git)
 
-Then just follow Bluemix instruction during & after deployment
+Then just follow IBM Cloud instructions during & after deployment
 
 ## Deploy the sample step by step
-Note that you need to have a Bluemix account. 
-[Sign up](http://www.ibm.com/cloud-computing/bluemix/) for Bluemix, or use an existing account.
+Note that you need to have a IBM Cloud account. 
+[Sign up](http://www.ibm.com/cloud-computing/) for IBM Cloud, or use an existing account.
 
 
 ### Running the app on Bluemix
@@ -29,7 +29,7 @@ Note that you need to have a Bluemix account.
 2. Clone the app to your local environment from your terminal using the following command
 
    ```
-   git clone https://github.com/IBM-Bluemix/docplexcloud-helloworld-nodejs.git
+   git clone https://github.com/IBM-Cloud/docplexcloud-helloworld-nodejs.git
    ```
 
 3. cd into this newly created directory
@@ -54,7 +54,7 @@ Note that you need to have a Bluemix account.
 	cf api https://api.ng.bluemix.net
 	cf login
 	```
-6. Create the Decision Optimization for IBM Bluemix service.
+6. Create the Decision Optimization for IBM Cloud service.
 
    ```
    cf create-service docplexcloud ODSTRIAL DOcplexcloud-service
