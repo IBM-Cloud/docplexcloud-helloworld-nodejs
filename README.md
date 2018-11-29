@@ -3,7 +3,7 @@
 
 Decision Optimization for IBM Cloud (DOcplexcloud) allows  to solve optimization problems on the cloud.
 
-This sample shows how you can build a simple Node.js application that use the [Decision Optimization for IBM Cloud](https://cloud.ibm.com/catalog/services/decision-optimization/). It demonstrates how to use the [Node.js Client](https://www.npmjs.com/package/docplexcloud-nodejs-api) to submit a problem to the optimization solver engine (CPLEX)  , get the results and monitor your jobs.
+This sample shows how you can build a simple Node.js application that uses the [Decision Optimization for IBM Cloud](https://cloud.ibm.com/catalog/services/decision-optimization/) service. It demonstrates how to use the [Node.js Client](https://www.npmjs.com/package/docplexcloud-nodejs-api) to submit a problem to the optimization solver engine (CPLEX), get the results and monitor your jobs.
 
 There are two ways to deploy the sample to Bluemix, automatically in one click or by cloning the sample to your local environment
 
