@@ -1,3 +1,7 @@
+# Note
+
+The Decision Optimizaiton for IBM Cloud service was retired in September 2020. There is a replacement service available on IBM Watson Machine Learning. You can read about this replacement here: https://www.ibm.com/cloud/blog/announcements/decision-optimization-now-available-in-watson-machine-learning-service
+
 # Decision Optimization for IBM Cloud Getting Started Sample
 ## Introduction
 
